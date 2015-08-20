@@ -20,7 +20,12 @@ RSpec.describe "StaticPages", type: :request do
         visit static_pages_home_path
         # expect(page).to have_selector("title", 
         #   text: "Ruby on Rails Tutorial Sample App | Home")
-        expect(page).to have_title("Ruby on Rails Tutorial Sample App | Home")
+        expect(page).to have_title("Ruby on Rails Tutorial Sample App")
+      end
+
+      it "should not have a custom page title" do
+        visit static_pages_home_path
+        expect(page).not_to have_title(" | Home")
       end
     end  
 
