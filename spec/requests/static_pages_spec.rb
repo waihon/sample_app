@@ -3,66 +3,67 @@ require 'rails_helper'
 RSpec.describe "StaticPages", type: :request do
   describe "GET /static_pages/home" do
     it "works! (now write some real specs)" do
-      get static_pages_home_path
+      get root_path
       expect(response).to have_http_status(200)
     end    
   end
 
   describe "Static pages" do
+
+    subject { page } 
+
     describe "Home page" do
-      it "should have the h1 'Sample App'" do
-        visit static_pages_home_path
-        #expect(page).to have_content("Sample App")
-        expect(page).to have_selector("h1", text: "Sample App")
-      end
 
-      it "should have the right title" do
-        visit static_pages_home_path
-        # expect(page).to have_selector("title", 
-        #   text: "Ruby on Rails Tutorial Sample App | Home")
-        expect(page).to have_title("Ruby on Rails Tutorial Sample App")
-      end
+      before { visit root_path }
 
-      it "should not have a custom page title" do
-        visit static_pages_home_path
-        expect(page).not_to have_title(" | Home")
-      end
+      # it "should have the h1 'Sample App'" do
+      #   expect(page).to have_selector("h1", text: "Sample App")
+      # end
+      it { should have_selector("h1", text: "Sample App")   }
+
+      it { should have_title(full_title("")) }
+
+      it { should_not have_title(" | Home") }
     end  
 
     describe "Help page" do
-      it "should have the h1 'Help'" do
-        visit static_pages_help_path
-        expect(page).to have_selector("h1", "Help")
-      end
 
-      it "should have the right title" do
-        visit static_pages_help_path
-        expect(page).to have_title("Ruby on Rails Tutorial Sample App | Help")
-      end
+      before { visit help_path }
+
+      it { should have_selector("h1", "Help") }
+
+      it { should have_title(full_title("Help")) }
     end
 
     describe "About page" do
-      it "should have the h1 'About Us'" do
-        visit static_pages_about_path
-        expect(page).to have_selector("h1", "About Us")
-      end
 
-      it "should have the right title" do
-        visit static_pages_about_path
-        expect(page).to have_title("Ruby on Rails Tutorial Sample App | About Us")
-      end      
+      before { visit about_path }
+
+      it { should have_selector("h1", "About Us") }
+
+      it { should have_title(full_title("About Us")) }
     end
 
     describe "Content page" do
-      it "should have the h1 'Contact'" do
-        visit static_pages_contact_path
-        expect(page).to have_selector("h1", text: "Contact")
-      end
 
-      it "should have the right title" do
-        visit static_pages_contact_path
-        expect(page).to have_title("Ruby on Rails Tutorial Sample App | Contact")
-      end
+      before { visit contact_path }
+
+      it { should have_selector("h1", text: "Contact") }
+
+      it { should have_title(full_title("Contact")) }
     end
   end
+
+  it "should have the right links on the layout" do
+    visit root_path
+    click_link "About"
+    expect(page).to have_title full_title("About Us")
+    click_link "Help"
+    expect(page).to have_title full_title("Help")
+    click_link "Contact"
+    expect(page).to have_title full_title("Contact")
+    click_link "Home"
+    click_link "Sign up now!"
+    expect(page).to have_title full_title("Sign up")
+  end  
 end
