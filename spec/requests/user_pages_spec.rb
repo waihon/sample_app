@@ -65,6 +65,7 @@ RSpec.describe "UserPages", type: :request do
 
         it { should have_title(user.name) }
         it { is_expected.to have_selector("div.alert.alert-success", text: "Welcome") }
+        it { is_expected.to have_link("Sign out") }
       end
     end
   end

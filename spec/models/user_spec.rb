@@ -17,6 +17,8 @@ RSpec.describe User, type: :model do
   it { is_expected.to respond_to(:password) }
   it { is_expected.to respond_to(:password_confirmation) }
   it { is_expected.to respond_to(:authenticate) }
+  it { is_expected.to respond_to(:password_confirmation) }
+  it { is_expected.to respond_to(:remember_token) }
 
   it { is_expected.to be_valid }
 
@@ -101,6 +103,14 @@ RSpec.describe User, type: :model do
       it { is_expected.not_to eq(user_for_invalid_password) }
       #specify { user_for_invalid_password.should be_falsey }
       specify { expect(user_for_invalid_password).to be_falsey }
+    end  
+  end
+
+  describe "remember token" do
+    before { @user.save }
+    it "should have a nonblank remember token" do
+      #its(:remember_token) { should_not be_blank }
+      expect(@user.remember_token).not_to be_blank
     end
   end
 end
