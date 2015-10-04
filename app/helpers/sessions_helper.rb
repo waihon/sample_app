@@ -7,11 +7,11 @@ module SessionsHelper
 
     # There's a subtle error here. See the addendum at the end 
     # of the lesson for details.
-    current_user = user
+    self.current_user = user
   end
 
   def signed_in?
-    current_user.nil?
+    !current_user.nil?
   end
 
   def current_user=(user)
@@ -25,7 +25,7 @@ module SessionsHelper
   def sign_out
     # There's a subtle error here. See the addendum at the end 
     # of the lesson for details.
-    current_user = nil
+    self.current_user = nil
     cookies.delete(:remember_token)
   end    
 end
