@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "AuthenticationPages", type: :request do
+RSpec.describe "Authentication", type: :request do
   # describe "GET /authentication_pages" do
   #   it "works! (now write some real specs)" do
   #     get authentication_pages_index_path
@@ -39,6 +39,7 @@ RSpec.describe "AuthenticationPages", type: :request do
       it { is_expected.to have_link("Sign out", href: signout_path) }
       it { is_expected.not_to have_link("Sign in", href: signin_path) }
       it { is_expected.to have_link("Settings", href: edit_user_path(user)) }
+      it { is_expected.to have_link("Users", href: users_path) }
       it { is_expected.not_to have_link("Sign in", href: signin_path) }
 
       describe "followed by signout" do
@@ -95,6 +96,11 @@ RSpec.describe "AuthenticationPages", type: :request do
           before { put user_path(user) }
           specify { expect(response).to redirect_to(signin_path) }
         end
+
+        describe "visiting the user index" do
+          before { visit users_path }
+          it { is_expected.to have_title("Sign in") }
+        end
       end
     end
 
@@ -110,6 +116,18 @@ RSpec.describe "AuthenticationPages", type: :request do
 
       describe "submitting a PUT request to the User#update action" do
         before { put user_path(wrong_user) }
+        specify { expect(response).to redirect_to(root_path) }
+      end
+    end
+
+    describe "as non-admin user" do
+      let(:user) { FactoryGirl.create(:user) }
+      let(:non_admin) { FactoryGirl.create(:user) }
+
+      before { sign_in non_admin }
+
+      describe "submitting a DELETE request to the Users#destroy action" do
+        before { delete user_path(user) }
         specify { expect(response).to redirect_to(root_path) }
       end
     end

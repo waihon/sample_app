@@ -16,11 +16,21 @@ RSpec.describe User, type: :model do
   it { is_expected.to respond_to(:password_digest) }
   it { is_expected.to respond_to(:password) }
   it { is_expected.to respond_to(:password_confirmation) }
+  it { is_expected.to respond_to(:admin) }
   it { is_expected.to respond_to(:authenticate) }
   it { is_expected.to respond_to(:password_confirmation) }
   it { is_expected.to respond_to(:remember_token) }
 
   it { is_expected.to be_valid }
+  it { is_expected.not_to be_admin }
+
+  # describe "accessible attributes" do
+  #   it "should not allow access to admin" do
+  #     expect do
+  #       User.new(admin: "1")
+  #     end.should raise_error(ActiveModel::MassAssignmentSecurity::Error)
+  #   end
+  # end
 
   describe "when name is not present" do
     before { @user.name = " " }
