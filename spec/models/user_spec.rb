@@ -32,6 +32,12 @@ RSpec.describe User, type: :model do
   #   end
   # end
 
+  describe "with admin attribute set to 'true'" do
+    before { @user.toggle!(:admin) }
+
+    it { is_expected.to be_admin }
+  end
+
   describe "when name is not present" do
     before { @user.name = " " }
     it { is_expected.not_to be_valid }
