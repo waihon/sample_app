@@ -1,3 +1,4 @@
+<!-- Reviewed -->
 <li id="<%= feed_item.id %>">
   <%= link_to gravatar_for(feed_item.user), feed_item.user %>
   <span class="user">
@@ -10,7 +11,7 @@
   <% if current_user?(feed_item.user) %>
     <!-- Specifying title as it's a HTML standard -->
     <%= link_to "delete", feed_item, method: :delete,
-                                     confirm: "You sure?",
-                                     title: feed_item.content %>
+                                     title: feed_item.content,
+                                     data: { confirm: "You sure?" } %>
   <% end %>
 </li>

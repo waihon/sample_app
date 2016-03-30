@@ -1,3 +1,4 @@
+<!-- Reviewed -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,8 +18,8 @@
   </div>
   <%= render "layouts/footer" %>
   <%= debug(params) if Rails.env.development? %>
-  <%= debug(request.fullpath) if Rails.env.development? %>
-  <%= debug(current_user) if Rails.env.development? %>
-  <%= debug(@user) if Rails.env.development? %>
+  <%= debug("Request's Fullpath: " + request.fullpath) if Rails.env.development? %>
+  <%= debug("Current User: " + (current_user.nil? ? "nil" : current_user.name)) if Rails.env.development? %>
+  <%= debug("User: " + (@user.nil? ? "nil" : (@user.name.nil? ? "name is nil" : @user.name))) if Rails.env.development? %>
 </body>
 </html>

@@ -1,7 +1,19 @@
+<!-- Reviewed -->
 <footer class="footer">
   <small>
-    <a href="http://railstutorial.org/">Rails Tutorial</a>
+<!--     <a href="http://railstutorial.org/">Rails Tutorial</a>
     by Michael Hartl
+ -->    <br/>
+    <br/>
+    <p>
+    Copyright &copy; 
+    <% if Time.now.year > 2015 %>
+      2015-<%= Time.now.year %>. 
+    <% else %>
+      2015.
+    <% end %>
+    Developed by <a href="http://fb.me/waihonpage">Waihon Yew</a> based on online Ruby on Rails course taught by <a href="http://railstutorial.org">Rails Tutorial</a>.
+    </p>    
   </small>
   <nav>
     <ul>

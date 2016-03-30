@@ -1,3 +1,4 @@
+# Reviewed
 module SessionsHelper
   def sign_in(user)
     # Permanent cookies
@@ -6,7 +7,7 @@ module SessionsHelper
     cookies.permanent[:remember_token] = user.remember_token
 
     # There's a subtle error here. See the addendum at the end 
-    # of the lesson for details. The error fixed by adding self.
+    # of the lesson for details. The error was fixed by adding self.
     self.current_user = user
   end
 
@@ -28,7 +29,7 @@ module SessionsHelper
 
   def sign_out
     # There's a subtle error here. See the addendum at the end 
-    # of the lesson for details: Added self
+    # of the lesson for details. The error was fixed by adding self.
     self.current_user = nil
     cookies.delete(:remember_token)
   end    

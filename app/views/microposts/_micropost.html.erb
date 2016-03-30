@@ -1,3 +1,4 @@
+<!-- Reviewed -->
 <l1>
   <span class="content"><%= micropost.content %></span>
   <span class="timestamp">
@@ -6,7 +7,7 @@
   <% if current_user?(micropost.user) %>
     <!-- Specifying title as it's a HTML standard -->
     <%= link_to "delete", micropost, method: :delete,
-                                     confirm: "You sure?",
-                                     title: micropost.content %>
+                                     title: micropost.content, 
+                                     data: { confirm: "You sure?" } %>
   <% end %>
 </li>                                  

@@ -1,20 +1,27 @@
+# Reviewing...
 Rails.application.routes.draw do
+  # Resource route with options
   resources :users do
     member do
       get :following, :followers
     end
   end
+
+  # Resource routes that map HTTP verbs to controller actions automatically
   resources :sessions, only: [:new, :create, :destroy]
   resources :microposts, only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
   
+  # Roots
   root to: "static_pages#home"
 
+  # Regular routes
   get "/signup",  to: "users#new"
   get "/signin",  to: "sessions#new"
   #get "/signout", to: "sessions#destroy", via: :delete
   delete "/signout" => "sessions#destroy"
 
+  # Regular routes
   get "/help",    to: "static_pages#help"
   get "/about",   to: "static_pages#about"
   get "/contact", to: "static_pages#contact"

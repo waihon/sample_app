@@ -1,3 +1,4 @@
+# Reviewed
 class UsersController < ApplicationController
   before_filter :signed_in_user, only: [:index, :edit, :update, :destroy, 
                 :following, :followers]
@@ -38,8 +39,8 @@ class UsersController < ApplicationController
     # Below has been moved to correct_user
     #@user = User.find(params[:id])
     if @user.update_attributes(user_params)
+      flash[:success] = "Profile updated"      
       sign_in @user
-      flash[:success] = "Profile updated"
       redirect_to @user
     else
       render "edit"

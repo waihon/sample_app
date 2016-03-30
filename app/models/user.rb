@@ -1,3 +1,4 @@
+# Reviewed
 class User < ActiveRecord::Base
   before_save { |user| user.email = user.email.downcase }
   before_save :create_remember_token
@@ -40,9 +41,10 @@ class User < ActiveRecord::Base
 
   def feed
     # This is only a proto-feed
-    # To prevent SQL injection, don't use interpolation
+    # To prevent SQL injection, don't use #{}, use ? instead.
     #Micropost.where("user_id = #{id}")
     #Micropost.where("user_id = ?", id)
+    # TODO
     Micropost.from_users_followed_by(self)
   end
 

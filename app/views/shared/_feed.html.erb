@@ -1,3 +1,6 @@
+<!-- Reviewed -->
+<!-- @feed_items will be empty instead of nil when current user -->
+<!-- doesn't have any micropost. -->
 <% if @feed_items.any? %>
   <ol class="microposts">
     <%= render partial: "shared/feed_item", collection: @feed_items %>

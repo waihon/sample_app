@@ -1,3 +1,4 @@
+# Reviewed
 class MicropostsController < ApplicationController
   before_filter :signed_in_user, only: [:create, :destroy]
   before_filter :correct_user, only: [:destroy]
@@ -8,14 +9,15 @@ class MicropostsController < ApplicationController
       flash[:success] = "Micropost created!"
       redirect_to root_path
     else
-      # To avoid @feed_items being nil which will cause run-time error.
-      #@feed_items = current_user.feed.paginate(page: params[:page])
-      @feed_items = []
+      # @feed_items will be empty instead of nil when the user
+      # doesn't have any micropost.
+      @feed_items = current_user.feed.paginate(page: params[:page])
       render "static_pages/home"
     end
   end
 
   def destroy
+    # @micropost is set in "correct_user" filter
     @micropost.destroy
     redirect_to root_path
   end
@@ -23,6 +25,8 @@ class MicropostsController < ApplicationController
   private
 
     def correct_user
+      # Each delete link has the ID of the corresponding micropost, 
+      # e.g. http://localhost:3000/microposts/247
       @micropost = current_user.microposts.find_by_id(params[:id])
       redirect_to root_path if @micropost.nil?
     end

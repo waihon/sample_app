@@ -1,8 +1,15 @@
+<!-- Reviewed -->
 <% provide(:title, "Sign in") %>
 <h1>Sign in</h1>
 
-<div class="row"
-  div class="span6 offset3">
+<div class="row">
+  <!-- <div class="span6 offset3"> -->
+  <div class="col-md-6 col-md-offset-3">
+    <!-- There is no Session model and therefore we can't use @session. -->
+    <!-- If there is such a a model then @session allows Rails to infer -->
+    <!-- that the action of the form should be to POST to the URI /sessions. -->
+    <!-- In this case, we need to indicate the name of the resource (:session) -->
+    <!--  and the corresponding URI (sessions_path). -->
     <%= form_for(:session, url: sessions_path) do |f| %>
       <%= f.label :email %>
       <%= f.text_field :email %>

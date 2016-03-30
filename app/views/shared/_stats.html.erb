@@ -1,3 +1,7 @@
+<!-- Reviewed -->
+<!-- This does nothing when @user is not nil (as on a profile page -->
+<!-- for which @user is set by UsersController), but when it is nil -->
+<!-- (as on the Home page) it sets @user to the current user. -->
 <% @user ||= current_user %>
 
 <div class="stats">
